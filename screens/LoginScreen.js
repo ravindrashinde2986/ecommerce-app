@@ -40,7 +40,7 @@ const LoginScreen = () => {
     };
 
     axios
-      .post("http://localhost:8000/login", user)
+      .post("http://192.168.7.170:8000/login", user)
       .then((response) => {
         console.log(response);
         const token = response.data.token;
@@ -48,7 +48,7 @@ const LoginScreen = () => {
         navigation.replace("Main");
       })
       .catch((error) => {
-        Alert.alert("Login Error", "Invalid Email");
+        // Alert.alert("Login Error", "Invalid Email");
         console.log(error);
       });
   };
@@ -61,6 +61,7 @@ const LoginScreen = () => {
           style={{ width: 150, height: 100 }}
           source={{
             uri: "https://assets.stickpng.com/thumbs/6160562276000b00045a7d97.png",
+            // uri: "https://png.pngtree.com/png-vector/20221228/ourlarge/pngtree-online-shopping-logo-desing-png-image_6540923.png",
           }}
         />
       </View>

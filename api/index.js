@@ -18,7 +18,7 @@ app.listen(port, () => {
 });
 
 mongoose
-  .connect("mongodb+srv://sujananand:sujan@cluster0.cueelai.mongodb.net/", {
+  .connect("mongodb+srv://rshinde:rshinde@cluster0.g1cwu.mongodb.net/", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -38,8 +38,8 @@ const sendVerificationEmail = async (email, verificationToken) => {
     // Configure the email service or SMTP details here
     service: "gmail",
     auth: {
-      user: "sujananand0@gmail.com",
-      pass: "wkkjjprzkqxtboju",
+      user: "ravindrashinde2986@gmail.com",
+      pass: "apgzsqliurczgwlo",
     },
   });
 
@@ -136,6 +136,7 @@ app.post("/login", async (req, res) => {
     const { email, password } = req.body;
 
     //check if the user exists
+    console.log("Checking if user present")
     const user = await User.findOne({ email });
     if (!user) {
       return res.status(401).json({ message: "Invalid email or password" });
@@ -148,6 +149,8 @@ app.post("/login", async (req, res) => {
 
     //generate a token
     const token = jwt.sign({ userId: user._id }, secretKey);
+
+    console.log(token)
 
     res.status(200).json({ token });
   } catch (error) {

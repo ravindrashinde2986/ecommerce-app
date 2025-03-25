@@ -9,6 +9,8 @@ import { cleanCart } from "../redux/CartReducer";
 import { useNavigation } from "@react-navigation/native";
 import RazorpayCheckout from "react-native-razorpay";
 
+
+
 const ConfirmationScreen = () => {
   const steps = [
     { title: "Address", content: "Address Form" },
@@ -30,7 +32,7 @@ const ConfirmationScreen = () => {
   const fetchAddresses = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8000/addresses/${userId}`
+        `http://192.168.7.170:8000/addresses/${userId}`
       );
       const { addresses } = response.data;
 
@@ -54,7 +56,7 @@ const ConfirmationScreen = () => {
       };
 
       const response = await axios.post(
-        "http://localhost:8000/orders",
+        "http://192.168.7.170:8000/orders",
         orderData
       );
       if (response.status === 200) {
@@ -70,11 +72,13 @@ const ConfirmationScreen = () => {
   };
   const pay = async () => {
     try {
+
+
       const options = {
         description: "Adding To Wallet",
         currency: "INR",
         name: "Amazon",
-        key: "rzp_test_E3GWYimxN7YMk8",
+        key: "rzp_test_rNmtfcgeBBk3o6",
         amount: total * 100,
         prefill: {
           email: "void@razorpay.com",
@@ -87,6 +91,7 @@ const ConfirmationScreen = () => {
       const data = await RazorpayCheckout.open(options);
 
       console.log(data)
+      // console.log(payment);
 
       const orderData = {
         userId: userId,
@@ -97,7 +102,7 @@ const ConfirmationScreen = () => {
       };
 
       const response = await axios.post(
-        "http://localhost:8000/orders",
+        "http://192.168.7.170:8000/orders",
         orderData
       );
       if (response.status === 200) {
